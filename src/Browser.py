@@ -7,12 +7,10 @@ from PyQt5.QtWidgets import QApplication
 class Browser(QWebView):
     def __init__(self, windows):
         self.view = QWebView.__init__(self)
-        self.setWindowTitle('Loading...')
-        self.titleChanged.connect(self.adjustTitle)
         self._window = windows
-        QApplication.clipboard().dataChanged.connect(self.clipboardChanged)
+        QApplication.clipboard().dataChanged.connect(self.clipboard_changed)
 
-    def clipboardChanged(self):
+    def clipboard_changed(self):
         url = "https://translate.google.com/m/translate#auto/fa/{}".format(QApplication.clipboard().text())
         self.load(QUrl(url))
 
@@ -20,9 +18,7 @@ class Browser(QWebView):
         self.setUrl(QUrl(url))
         self._window.setVisible(True)
 
-    def adjustTitle(self):
-        self.setWindowTitle(self.title())
-
-    def disableJS(self):
+    @staticmethod
+    def disable_js():
         settings = QWebSettings.globalSettings()
         settings.setAttribute(QWebSettings.JavascriptEnabled, False)

@@ -19,10 +19,10 @@ class App(QWidget):
     def init_ui(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        beowser = Browser(self)
-        beowser.load("https://translate.google.com/m/translate#auto/fa/")
+        browser = Browser(self)
+        browser.load("https://translate.google.com/m/translate#auto/fa/")
         layout = QVBoxLayout(self)
-        layout.addWidget(beowser)
+        layout.addWidget(browser)
 
         button = QPushButton("Hide")
         button.clicked.connect(self.hide)
