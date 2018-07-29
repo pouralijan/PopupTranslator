@@ -1,12 +1,10 @@
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWebKit import QWebSettings
-from PyQt5.QtWebKitWidgets import QWebPage, QWebView
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import QUrl
+from PySide2.QtWidgets import QApplication
+from PySide2.QtWebEngineWidgets import QWebEngineView
 
-
-class Browser(QWebView):
+class Browser(QWebEngineView):
     def __init__(self, windows):
-        self.view = QWebView.__init__(self)
+        self.view = QWebEngineView.__init__(self)
         self._window = windows
         QApplication.clipboard().dataChanged.connect(self.clipboard_changed)
 
@@ -17,8 +15,3 @@ class Browser(QWebView):
     def load(self, url):
         self.setUrl(QUrl(url))
         self._window.setVisible(True)
-
-    @staticmethod
-    def disable_js():
-        settings = QWebSettings.globalSettings()
-        settings.setAttribute(QWebSettings.JavascriptEnabled, False)

@@ -1,6 +1,6 @@
-from PyQt5 import QtCore
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton
+from PySide2 import QtCore
+from PySide2.QtCore import Slot
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton
 
 from Browser import Browser
 
@@ -29,6 +29,6 @@ class App(QWidget):
         layout.addWidget(button)
         self.show()
 
-    @pyqtSlot()
+    @Slot()
     def hide(self):
         self.setVisible(False)

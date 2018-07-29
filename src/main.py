@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 
 from Gui import App
 
