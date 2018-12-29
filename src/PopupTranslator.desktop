@@ -1,0 +1,11 @@
+[Desktop Entry]
+
+Type = Application
+Version = 1.0
+Name = PopupTranslator
+Comment = Google popup translator
+Path = /opt/PopupTranslator/
+Exec = /opt/PopupTranslator/venv/bin/python /opt/PopupTranslator/main.py
+Icon = /opt/PopupTranslator/icon.png
+Terminal = false
+Categories = Education;Languages;
