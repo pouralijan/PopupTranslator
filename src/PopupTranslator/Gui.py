@@ -1,10 +1,14 @@
+#!/usr/bin/env python3
+
+import os
+
 from PySide2 import QtCore
 from PySide2.QtGui import qApp, QIcon
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QMenu, QAction
 from PySide2.QtWidgets import QSystemTrayIcon
 
-from Browser import PopupBrowser
+import PopupTranslator
 
 
 class SystemTrayIconActions(object):
@@ -30,7 +34,8 @@ class SystemTrayIconMenu(object):
         self.tray_icon.setContextMenu(self.tray_icon_menu)
 
 
-class PopupTranslator(QWidget):
+class PopupTranslatorWidget(QWidget):
+    DATA_LOCATION = "/usr/share/PopupTranslator/"
     def __init__(self, screen_resolution) -> None:
         super().__init__()
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
@@ -43,7 +48,7 @@ class PopupTranslator(QWidget):
         self._source_language = ""
         self._des_language = "fa"
 
-        self.icon = QIcon("./icon.png")
+        self.icon = QIcon(os.path.join(self.DATA_LOCATION, "./icon.png"))
 
         system_tray_icon_action = SystemTrayIconActions(self)
         system_tray_icon_menu = SystemTrayIconMenu(
@@ -57,7 +62,7 @@ class PopupTranslator(QWidget):
         self.setWindowTitle(self.title)
         self.setWindowIcon(self.icon)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        popup_browser = PopupBrowser(self)
+        popup_browser = PopupTranslator.PopupBrowser(self)
         popup_browser.load(
                 "https://translate.google.com/m/translate#auto/{}/".format(
                     self.get_des_language()))

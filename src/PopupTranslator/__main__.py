@@ -2,11 +2,15 @@
 import sys
 from PySide2.QtWidgets import QApplication
 
-from Gui import PopupTranslator
+from .PopupTranslator import PopupTranslatorWidget
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     screen_resolution = app.desktop().screenGeometry()
-    exce = PopupTranslator(screen_resolution)
+    exce = PopupTranslatorWidget(screen_resolution)
     exce.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    print("Main")
+    #main()

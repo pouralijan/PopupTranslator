@@ -11,7 +11,8 @@ install_venv: requirements.txt
 	mkdir -pv /opt/PopupTranslator/
 	if [ ! -d /opt/PopupTranslator/venv/ ]; \
 	then \
-		virtualenv /opt/PopupTranslator/venv; \
+		python3 -m venv /opt/PopupTranslator/venv; \
 	fi
 	. /opt/PopupTranslator/venv/bin/activate
+	/opt/PopupTranslator/venv/bin/pip install --upgrade pip
 	/opt/PopupTranslator/venv/bin/pip install -r requirements.txt
