@@ -2,7 +2,7 @@
 import sys
 from PySide2.QtWidgets import QApplication
 
-from .PopupTranslator import PopupTranslatorWidget
+from PopupTranslator import PopupTranslatorWidget
 
 def main():
     app = QApplication(sys.argv)
