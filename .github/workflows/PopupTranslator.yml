@@ -5,14 +5,14 @@ on: [push]
 jobs:
 
   lint:
-    runs-on: linux
+    runs-on: ubuntu-18.04
     steps:
       - name: python-lint
         uses: CyberZHG/github-action-python-lint@0.0.2
      
   build:
 
-    runs-on: linux
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v1
