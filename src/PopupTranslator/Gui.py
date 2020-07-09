@@ -3,7 +3,7 @@
 import os
 
 from PySide2 import QtCore
-from PySide2.QtGui import qApp, QIcon
+from PySide2.QtGui import QGuiApplication, QIcon
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QMenu, QAction
 from PySide2.QtWidgets import QSystemTrayIcon
@@ -14,7 +14,7 @@ import PopupTranslator
 class SystemTrayIconActions(object):
     def __init__(self, widget):
         self._actions_list = []
-        self.Quit = QAction("&Quit", widget, triggered=qApp.quit)
+        self.Quit = QAction("&Quit", widget, triggered=QGuiApplication.quit)
 
         self._actions_list.append(self.Quit)
 
