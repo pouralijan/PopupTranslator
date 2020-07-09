@@ -1,1 +1,1 @@
-PySide2==5.11.1
+PySide2
