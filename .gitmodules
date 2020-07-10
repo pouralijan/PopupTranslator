@@ -1,0 +1,3 @@
+[submodule ".githooks"]
+	path = .githooks
+	url = git@github.com:pouralijan/.githooks.git
