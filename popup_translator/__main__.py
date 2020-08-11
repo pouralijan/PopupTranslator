@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 import sys
-from PySide2.QtWidgets import QApplication
 
-from PopupTranslator import PopupTranslatorWidget
+try:
+    from PySide2.QtWidgets import QApplication
+except ImportError as error:
+    raise SystemExit(error)
+
+from popup_translator import PopupTranslatorWidget
 
 def main():
     app = QApplication(sys.argv)
@@ -12,5 +16,4 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
-    print("Main")
-    #main()
+    main()

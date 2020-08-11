@@ -2,13 +2,16 @@
 
 import os
 
-from PySide2 import QtCore
-from PySide2.QtGui import QGuiApplication, QIcon
-from PySide2.QtCore import Slot
-from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QMenu, QAction
-from PySide2.QtWidgets import QSystemTrayIcon
+try:
+    from PySide2 import QtCore
+    from PySide2.QtGui import QGuiApplication, QIcon
+    from PySide2.QtCore import Slot
+    from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QMenu, QAction, QTabWidget
+    from PySide2.QtWidgets import QSystemTrayIcon, QGridLayout
+except ImportError as error:
+    raise SystemExit(error)
 
-import PopupTranslator
+from .browser import PopupBrowser
 
 
 class SystemTrayIconActions(object):
@@ -62,12 +65,34 @@ class PopupTranslatorWidget(QWidget):
         self.setWindowTitle(self.title)
         self.setWindowIcon(self.icon)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        popup_browser = PopupTranslator.PopupBrowser(self)
-        popup_browser.load(
-                "https://translate.google.com/m/translate#auto/{}/".format(
-                    self.get_des_language()))
-        layout = QVBoxLayout(self)
-        layout.addWidget(popup_browser)
+
+        google_url = "https://translate.google.com/m/translate#auto/{}/{}"
+        popup_browser_google = PopupBrowser(self, google_url, "en", "Google")
+
+        cambridge_url = "https://dictionary.cambridge.org/dictionary/{}/{}"
+        popup_browser_cambridge = PopupBrowser(self, cambridge_url, "english", "Cambridge")
+
+        collins_url = "https://www.collinsdictionary.com/dictionary/{}/{}"
+        popup_browser_collins = PopupBrowser(self, collins_url, "english", "Collins")
+
+        oxford_url = "https://www.oxfordlearnersdictionaries.com/definition/{}/{}"
+        popup_browser_oxford = PopupBrowser(self, oxford_url, "english", "Oxford")
+
+        dictionaries = []
+        dictionaries.append(popup_browser_google)
+        dictionaries.append(popup_browser_cambridge)
+        dictionaries.append(popup_browser_collins)
+        dictionaries.append(popup_browser_oxford)
+
+        layout = QGridLayout()
+        self.setLayout(layout)
+        tabwidget = QTabWidget()
+
+        
+        for dictionary in dictionaries:
+            tabwidget.addTab(dictionary, dictionary.name)
+
+        layout.addWidget(tabwidget, 0, 0)
         button = QPushButton("Hide")
         button.clicked.connect(self.hide)
         layout.addWidget(button)

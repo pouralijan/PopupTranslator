@@ -6,15 +6,16 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 
 
 class PopupBrowser(QWebEngineView):
-    def __init__(self, windows):
+    def __init__(self, windows, url, des_language, name):
         self.view = QWebEngineView.__init__(self)
         self._window = windows
+        self.url = url
+        self.name = name
+        self.des_language = des_language
         QApplication.clipboard().dataChanged.connect(self.clipboard_changed)
 
     def clipboard_changed(self):
-        url = "https://translate.google.com/m/translate#auto/{}/{}".format(
-                self._window.get_des_language(),
-                QApplication.clipboard().text())
+        url = self.url.format(self.des_language, QApplication.clipboard().text())
         self.load(QUrl(url))
 
     def load(self, url):
